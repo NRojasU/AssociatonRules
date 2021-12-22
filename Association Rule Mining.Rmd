@@ -1,0 +1,96 @@
+---
+title: "Plotting association rules"
+author: "Nicolás Rojas Ulriksen"
+date: "21-12-2021"
+output: html_document
+---
+
+```{r}
+rm(list = ls())
+```
+
+```{r eval=FALSE, include=FALSE}
+install.packages('arulesViz')
+install.packages('apriori')
+```
+
+```{r}
+library('readxl')
+library('arulesViz')
+library('arules')
+library('tidyr')
+library('dplyr')
+```
+
+
+```{r}
+# Cargamos las reglas de asociacion generadas a partir de los resultados del test GMA.
+gma_ar <- read_xlsx('C:/Users/Nico/Desktop/EB Metrics/BDD/Association Rules/Relevant GMA Association Rules.xlsx')
+
+# Cargamos las reglas de asociacion generadas a partir de los resultados Personali-T.
+pers_ar <- read_xlsx('C:/Users/Nico/Desktop/EB Metrics/BDD/Association Rules/Relevant Personali-T Association Rules.xlsx')
+```
+```{r}
+summary(pers_ar)
+summary(gma_ar)
+```
+
+```{r}
+gma_ar$...1  <- NULL
+names(gma_ar)[names(gma_ar) == 'antecedent support'] <- 'antecedent_support'
+names(gma_ar)[names(gma_ar) == 'consequent support'] <- 'consecuent_support'
+
+pers_ar$...1  <- NULL
+names(pers_ar)[names(pers_ar) == 'antecedent support'] <- 'antecedent_support'
+names(pers_ar)[names(pers_ar) == 'consequent support'] <- 'consecuent_support'
+
+```
+
+
+
+```{r}
+pers <- read.csv('C:/Users/Nico/Desktop/EB Metrics/BDD/GMA y Personali-T/Personali-T/Binary CSV/PERSONALI-T_BIN_CONSOLIDADO.csv')
+
+pers$X <- NULL
+
+pers <- as.data.frame(pers)
+
+pers <- pers %>% 
+    mutate_if(is.numeric,as.logical)
+```
+
+```{r}
+rules <- apriori(pers, parameter = list(support = 0.8, confidence = 0.95), control = list(memopt = TRUE, load = FALSE))
+```
+
+
+```{r}
+plot(rules)
+```
+
+```{r}
+plot(rules,
+     shading = 'order',
+     control = list(main ='Two-key plot'))
+```
+
+```{r}
+sel <- plot(rules,
+            measure = c('support', 'lift'),
+            shading = 'confidence',
+            jitter = 0,
+            interactive = TRUE)
+```
+
+
+
+
+```{r}
+head(quality(rules))
+```
+
+
+
+
+
+
