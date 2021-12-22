@@ -1,0 +1,2 @@
+# AssociatonRules
+Association Rule mining for psychometric Data. In the present Repository there are Python files and RStudio files because I'm trying both languages to mine association rules related to psychometric data, being GMA the results of hability tests and Personali-T being the results of psychometric studies of each candidate. Due to presence of sensitive information, the databases will not be uploaded.
