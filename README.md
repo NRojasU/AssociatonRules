@@ -7,7 +7,7 @@ Neither the raw data nor the files where the data is modified will be uploaded d
 ## About the files:
 - *Apriori Personali-T* is the implementation of the Apriori Algorithm for association rule mining for the personality traits evaluation dataset.
 
-- *Apriori GMA* is the implementation of the Apriori Algorithm for association rule mining for the hability evaluation dataset.
+- *Apriori GMA* is the implementation of the Apriori Algorithm for association rule mining for the ability evaluation dataset.
 
 - *Association Rule Mining* will contain anly Personality traits data because GMA Association rules (python file) showed that the most relevant rules were all related to time variables, which makes absolute sense because those variables measure the time spent on a question, showing an obvious relation between the earlier questions (antecedents) and the las questions (consequences). The purpose of this particular file is recreating Association Rules in RStudio and plotting and clustering them with the R Library 'arulesViz'.
 
